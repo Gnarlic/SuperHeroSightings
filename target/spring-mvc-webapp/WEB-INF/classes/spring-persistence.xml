@@ -20,11 +20,11 @@
     <context:component-scan base-package="com.sg.superherosightings.dao"/>
     <bean id="dataSource"
           class="org.apache.commons.dbcp2.BasicDataSource">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="driverClassName" value="org.mariadb.jdbc.Driver"/>
         <property name="url"
-                  value="jdbc:mysql://localhost:3306/super_being_sightings"/>
-        <property name="username" value="root"/>
-        <property name="password" value="root"/>
+                  value="jdbc:mariadb://167.88.15.73:3306/gnarlitr_super_being_sightings"/>
+        <property name="username" value="gnarlitr_admin"/>
+        <property name="password" value="fender55"/>
         <property name="initialSize" value="5"/>
         <property name="maxTotal" value="10"/>
     </bean>

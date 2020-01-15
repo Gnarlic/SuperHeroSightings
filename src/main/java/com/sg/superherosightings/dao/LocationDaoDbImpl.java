@@ -28,15 +28,15 @@ public class LocationDaoDbImpl implements LocationDao {
     }
 
     private static final String SQL_GET_ALL_LOCATIONS = "select * from Location";
-    private static final String SQL_GET_LOCATIONS_FOR_SUPERBEING = "select * from location l inner join SuperbeingLocation sl ON l.LocationId = sl.LocationId where sl.SuperbeingId = ?";
+    private static final String SQL_GET_LOCATIONS_FOR_SUPERBEING = "select * from Location l inner join SuperbeingLocation sl ON l.LocationId = sl.LocationId where sl.SuperbeingId = ?";
     private static final String SQL_GET_LOCATION_FOR_SIGHTING = "";
-    private static final String SQL_GET_LOCATION = "select * from location where LocationId = ?";
+    private static final String SQL_GET_LOCATION = "select * from Location where LocationId = ?";
     private static final String SQL_ADD_LOCATION = "INSERT INTO Location (LocationName, LocationDescription, LocationAddress, "
             + "LocationStreetName, LocationCityName, LocationStateName, LocationZipCode, "
             + "Latitude, Longitude) VALUES (?,?,?,?,?,?,?,?,?)";
-    private static final String SQL_EDIT_LOCATION = "update location set "
+    private static final String SQL_EDIT_LOCATION = "update Location set "
             + "LocationName = ?, LocationDescription = ?, LocationAddress = ?, LocationStreetName = ?, "
-            + "LocationCityName = ?, LocationStateName = ?, LocationZipCode = ?, Latitude = ?, Longitude = ? where locationid = ?";
+            + "LocationCityName = ?, LocationStateName = ?, LocationZipCode = ?, Latitude = ?, Longitude = ? where LocationId = ?";
     private static final String SQL_DELETE_LOCATION = "delete from Location where LocationId = ?";
     private static final String SQL_SEARCH_LOCATIONS = "Select * from Location where LocationName like ?";
 

@@ -27,7 +27,7 @@ public class OrganizationDaoDbImpl implements OrganizationDao {
     public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
         this.jdbc = jdbcTemplate;
     }
-    private static final String SQL_ADD_MEMBER = "Insert into superbeingorganization (SuperbeingId, OrganizationId) values (?,?)";
+    private static final String SQL_ADD_MEMBER = "Insert into SuperbeingOrganization (SuperbeingId, OrganizationId) values (?,?)";
     private static final String SQL_SEARCH_ORGANIZATIONS = "select * from Organization where OrganizationName like ?";
     private static final String SQL_GET_ALL_ORGANIZATIONS = "select * from Organization";
     private static final String SQL_GET_ALL_ORGANIZATIONS_FOR_SUPER = "Select o.OrganizationId, o.OrganizationName, o.OrganizationDescription, o.OrganizationPhoneNumber, o.LocationId from Organization o "

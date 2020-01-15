@@ -31,40 +31,40 @@ public class SightingDaoDbImpl implements SightingDao {
     }
 
     private static final String SQL_GET_LAST_TEN_SIGHTINGS = "select sb.SuperbeingName, sb.SuperbeingId, sb.HeroOrVillain, l.LocationId, l.LocationName, s.SightingDate, s.SightingId from Superbeing sb "
-            + "inner join superbeingsighting ss ON sb.SuperbeingId = ss.SuperbeingId "
+            + "inner join SuperbeingSighting ss ON sb.SuperbeingId = ss.SuperbeingId "
             + "inner join Sighting s ON ss.SightingId = s.SightingId "
             + "inner join Location l ON s.LocationId = l.LocationId ORDER BY s.SightingDate DESC LIMIT 10";
     private static final String SQL_GET_SIGHTINGS_FOR_LOCATION = "select sb.SuperbeingName, sb.SuperbeingId, sb.HeroOrVillain, l.LocationId, l.LocationName, s.SightingDate, s.SightingId from Superbeing sb "
-            + "inner join superbeingsighting ss ON sb.SuperbeingId = ss.SuperbeingId "
+            + "inner join SuperbeingSighting ss ON sb.SuperbeingId = ss.SuperbeingId "
             + "inner join Sighting s ON ss.SightingId = s.SightingId "
             + "inner join Location l ON s.LocationId = l.LocationId where locationId = ? ORDER BY s.SightingDate DESC";
     private static final String SQL_GET_SIGHTINGS_WITH_SUPER = "select sb.SuperbeingName, sb.SuperbeingId, sb.HeroOrVillain, l.LocationId, l.LocationName, s.SightingDate, s.SightingId from Superbeing sb "
-            + "inner join superbeingsighting ss ON sb.SuperbeingId = ss.SuperbeingId "
+            + "inner join SuperbeingSighting ss ON sb.SuperbeingId = ss.SuperbeingId "
             + "inner join Sighting s ON ss.SightingId = s.SightingId "
             + "inner join Location l ON s.LocationId = l.LocationId where sb.superbeingId = ? ORDER BY s.SightingDate DESC";
     private static final String SQL_GET_ALL_SIGHTINGS = "select sb.SuperbeingName, sb.SuperbeingId, sb.HeroOrVillain, l.LocationId, l.LocationName, s.SightingDate, s.SightingId from Superbeing sb "
-            + "inner join superbeingsighting ss ON sb.SuperbeingId = ss.SuperbeingId "
+            + "inner join SuperbeingSighting ss ON sb.SuperbeingId = ss.SuperbeingId "
             + "inner join Sighting s ON ss.SightingId = s.SightingId "
             + "inner join Location l ON s.LocationId = l.LocationId ORDER BY s.SightingDate DESC";
     private static final String SQL_GET_SIGHTINGS_FOR_DATE = "select sb.SuperbeingName, sb.SuperbeingId, sb.HeroOrVillain, l.LocationId, l.LocationName, s.SightingDate, s.SightingId from Superbeing sb "
-            + "inner join superbeingsighting ss ON sb.SuperbeingId = ss.SuperbeingId "
+            + "inner join SuperbeingSighting ss ON sb.SuperbeingId = ss.SuperbeingId "
             + "inner join Sighting s ON ss.SightingId = s.SightingId "
             + "inner join Location l ON s.LocationId = l.LocationId where s.SightingDate = ?";
     private static final String SQL_ADD_SIGHTING = "insert into Sighting (LocationId, SightingDate) values (?,?) ";
-    private static final String SQL_ADD_SIGHTING_SUPERBEING = "insert into superbeingsighting (sightingId, superbeingId) values (?,?) ";
+    private static final String SQL_ADD_SIGHTING_SUPERBEING = "insert into SuperbeingSighting (sightingId, superbeingId) values (?,?) ";
     private static final String SQL_GET_SIGHTING = "select sb.SuperbeingName, sb.SuperbeingId, sb.HeroOrVillain, l.LocationId, l.LocationName, s.SightingDate, s.SightingId from Superbeing sb "
-            + "inner join superbeingsighting ss ON sb.SuperbeingId = ss.SuperbeingId "
+            + "inner join SuperbeingSighting ss ON sb.SuperbeingId = ss.SuperbeingId "
             + "inner join Sighting s ON ss.SightingId = s.SightingId "
             + "inner join Location l ON s.LocationId = l.LocationId where s.sightingId = ?";
     private static final String SQL_EDIT_SIGHTING = "update Sighting set LocationId = ?, SightingDate = ? where SightingId = ?";
     private static final String SQL_DELETE_SIGHTING = "delete from sighting where SightingId = ?";
     private static final String SQL_GET_SIGHTINGS_AND_LOCATIONS_FOR_SUPER = "select l.locationId, l.locationName, l.locationDescription , s.sightingdate, sb.superbeingName from location l "
             + "inner join sightinglocation sl ON l.locationId = sl.locationId "
-            + "inner join superbeingsighting ss ON sl.sightingId = ss.sightingId "
+            + "inner join SuperbeingSighting ss ON sl.sightingId = ss.sightingId "
             + "inner join sighting s ON ss.sightingid = s.sightingid "
             + "inner join superbeing sb ON ss.superbeingId = sb.superbeingId  "
             + "where ss.superbeingid = ?";
-    private static final String SQL_EDIT_SUPERBEING_SIGHTING = "update superbeingsighting set superbeingId = ? where sightingId = ?";
+    private static final String SQL_EDIT_SUPERBEING_SIGHTING = "update SuperbeingSighting set superbeingId = ? where sightingId = ?";
 
     @Override
     public List<SightingInfo> getLast10Sightings() {

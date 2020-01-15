@@ -23,18 +23,18 @@ import org.springframework.ui.Model;
  */
 public class SuperbeingDaoDbImpl implements SuperbeingDao {
 
-    private static final String SQL_ADD_SUPERBEING = "insert into superbeing (SuperbeingName, SuperbeingDescription, SuperbeingPower, HeroOrVillain) values (?,?,?,?)";
-    private static final String SQL_GET_ALL_SUPERBEINGS = "select * from superbeing";
-    private static final String SQL_GET_SUPERBEING = "select * from superbeing where SuperbeingId = ?";
-    private static final String SQL_DELETE_SUPERBEING = "delete from superbeing where SuperbeingId = ?";
-    private static final String SQL_GET_SUPERBEINGS_AT_LOCATION = "select sb.superbeingId, sb.superbeingname, sb.superbeingdescription, sb.superbeingpower, sb.heroorvillain "
-            + "from superbeing sb "
-            + "inner join superbeinglocation sl ON sb.superbeingId = sl.superbeingId "
+    private static final String SQL_ADD_Superbeing = "insert into Superbeing (SuperbeingName, SuperbeingDescription, SuperbeingPower, HeroOrVillain) values (?,?,?,?)";
+    private static final String SQL_GET_ALL_SuperbeingS = "select * from Superbeing";
+    private static final String SQL_GET_Superbeing = "select * from Superbeing where SuperbeingId = ?";
+    private static final String SQL_DELETE_Superbeing = "delete from Superbeing where SuperbeingId = ?";
+    private static final String SQL_GET_SuperbeingS_AT_LOCATION = "select sb.SuperbeingId, sb.Superbeingname, sb.Superbeingdescription, sb.Superbeingpower, sb.heroorvillain "
+            + "from Superbeing sb "
+            + "inner join Superbeinglocation sl ON sb.SuperbeingId = sl.SuperbeingId "
             + "where sl.locationid = ?";
-    private static final String SQL_EDIT_SUPERBEING = "update superbeing set superbeingname = ?, superbeingdescription = ?, superbeingpower = ?, heroorvillain = ? where superbeingid = ?";
-    private static final String SQL_SEARCH_SUPERBEING = "select * from superbeing where superbeingName like ?";
-    private static final String SQL_GET_MEMBERS = "select * from superbeing s "
-            + "inner join SuperbeingOrganization so ON s.superbeingId = so.superbeingId "
+    private static final String SQL_EDIT_Superbeing = "update Superbeing set Superbeingname = ?, Superbeingdescription = ?, Superbeingpower = ?, heroorvillain = ? where Superbeingid = ?";
+    private static final String SQL_SEARCH_Superbeing = "select * from Superbeing where SuperbeingName like ?";
+    private static final String SQL_GET_MEMBERS = "select * from Superbeing s "
+            + "inner join SuperbeingOrganization so ON s.SuperbeingId = so.SuperbeingId "
             + "where so.organizationId = ?";
     
     private JdbcTemplate jdbc;
@@ -45,51 +45,51 @@ public class SuperbeingDaoDbImpl implements SuperbeingDao {
 
     @Override
     public List<Superbeing> getAllSuperbeings() {
-        return jdbc.query(SQL_GET_ALL_SUPERBEINGS, new SuperbeingMapper());
+        return jdbc.query(SQL_GET_ALL_SuperbeingS, new SuperbeingMapper());
     }
 
     @Override
     public List<Superbeing> getSuperbeingsAtLocation(Location location) {
-        return jdbc.query(SQL_GET_SUPERBEINGS_AT_LOCATION, new SuperbeingMapper(), location.getLocationId());
+        return jdbc.query(SQL_GET_SuperbeingS_AT_LOCATION, new SuperbeingMapper(), location.getLocationId());
     }
 
     @Override
     public Superbeing getSuperbeing(int superId) {
-        return jdbc.queryForObject(SQL_GET_SUPERBEING, new SuperbeingMapper(), superId);
+        return jdbc.queryForObject(SQL_GET_Superbeing, new SuperbeingMapper(), superId);
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    public Superbeing addSuper(Superbeing superbeing) {
-        jdbc.update(SQL_ADD_SUPERBEING,
-                superbeing.getSuperbeingName(),
-                superbeing.getSuperbeingDescription(),
-                superbeing.getSuperbeingPower(),
-                superbeing.getHeroOrVillain());
-        int superbeingId = jdbc.queryForObject("select LAST_INSERT_ID()", Integer.class);
-        superbeing.setSuperbeingId(superbeingId);
-        return superbeing;
+    public Superbeing addSuper(Superbeing Superbeing) {
+        jdbc.update(SQL_ADD_Superbeing,
+                Superbeing.getSuperbeingName(),
+                Superbeing.getSuperbeingDescription(),
+                Superbeing.getSuperbeingPower(),
+                Superbeing.getHeroOrVillain());
+        int SuperbeingId = jdbc.queryForObject("select LAST_INSERT_ID()", Integer.class);
+        Superbeing.setSuperbeingId(SuperbeingId);
+        return Superbeing;
     }
 
     @Override
-    public void editSuper(Superbeing superbeing) {
-        jdbc.update(SQL_EDIT_SUPERBEING,
-                superbeing.getSuperbeingName(),
-                superbeing.getSuperbeingDescription(),
-                superbeing.getSuperbeingPower(),
-                superbeing.getHeroOrVillain(),
-                superbeing.getSuperbeingId());
+    public void editSuper(Superbeing Superbeing) {
+        jdbc.update(SQL_EDIT_Superbeing,
+                Superbeing.getSuperbeingName(),
+                Superbeing.getSuperbeingDescription(),
+                Superbeing.getSuperbeingPower(),
+                Superbeing.getHeroOrVillain(),
+                Superbeing.getSuperbeingId());
     }
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
-    public void deleteSuper(Superbeing superbeing) {
-        jdbc.update(SQL_DELETE_SUPERBEING, superbeing.getSuperbeingId());
+    public void deleteSuper(Superbeing Superbeing) {
+        jdbc.update(SQL_DELETE_Superbeing, Superbeing.getSuperbeingId());
     }
 
     @Override
     public List<Superbeing> searchSuperbeing(String superName) {
-        return jdbc.query(SQL_SEARCH_SUPERBEING, new SuperbeingMapper(), "%"+superName+"%");
+        return jdbc.query(SQL_SEARCH_Superbeing, new SuperbeingMapper(), "%"+superName+"%");
     }
 
     @Override
@@ -102,13 +102,13 @@ public class SuperbeingDaoDbImpl implements SuperbeingDao {
         @Override
         public Superbeing mapRow(ResultSet rs, int i) throws SQLException {
 
-            Superbeing superbeing = new Superbeing();
-            superbeing.setSuperbeingId(rs.getInt("SuperbeingId"));
-            superbeing.setSuperbeingName(rs.getString("SuperbeingName"));
-            superbeing.setSuperbeingPower(rs.getString("SuperbeingPower"));
-            superbeing.setSuperbeingDescription(rs.getString("SuperbeingDescription"));
-            superbeing.setHeroOrVillain(rs.getString("HeroOrVillain"));
-            return superbeing;
+            Superbeing Superbeing = new Superbeing();
+            Superbeing.setSuperbeingId(rs.getInt("SuperbeingId"));
+            Superbeing.setSuperbeingName(rs.getString("SuperbeingName"));
+            Superbeing.setSuperbeingPower(rs.getString("SuperbeingPower"));
+            Superbeing.setSuperbeingDescription(rs.getString("SuperbeingDescription"));
+            Superbeing.setHeroOrVillain(rs.getString("HeroOrVillain"));
+            return Superbeing;
 
         }
 
