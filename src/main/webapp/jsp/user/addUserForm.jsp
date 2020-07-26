@@ -90,7 +90,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="admine" class="col-md-2 control-label">Admin User? </label>
+                    <label for="admin" class="col-md-2 control-label">Admin User? </label>
                     <div class="col-md-4">
                     <input type="checkbox" class="form-group" id="admin"
                                        name="isAdmin" value="yes"/>
