@@ -72,7 +72,6 @@
             </div>
         </div>
         <div class="container">
-            <h1>Company Contacts</h1>
             <hr/>
             <h2>Login Page</h2>
 
